@@ -49,10 +49,11 @@ export default function Home() {
       const result = await answerQuestionsFromWebsite({websiteUrl, question});
       setAnswer(result.answer);
     } catch (error: any) {
+      console.error('Question answering error:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: `Failed to get answer: ${error.message}`,
+        description: `Failed to get answer: ${error instanceof Error ? error.message : 'An unexpected error occurred'}`,
       });
       setAnswer('Error answering question.');
     } finally {
